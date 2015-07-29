@@ -1,13 +1,15 @@
 # Repetier-Firmware - the fast and user friendly firmware
 
-#for ORION DELTA by SEEMECNC 
+#for ERIS DELTA by SEEMECNC 
 
-Special thanks to the following for getting configurations for the Orion machines:
+Special thanks to the following:
 
 in2str
 guanu
+tonokip
 
-and many others on http://forum.seemecnc.com
+
+and many others on http://forum.seemecnc.com and reprap.org
 
  
 
