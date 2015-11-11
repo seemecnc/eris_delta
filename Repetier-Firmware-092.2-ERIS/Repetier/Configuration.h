@@ -47,7 +47,7 @@
    ERIS = 3
    DROPLIT = 4
  */
-#define PRINTER 4
+#define PRINTER 3
 
 #include "pins.h"
 
@@ -55,7 +55,10 @@
 //  Microstepping mode of your RAMBO board
 #define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
 // Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
-#define MOTOR_CURRENT {140,140,140,150,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+#define MOTOR_CURRENT {140,140,140,130,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+//  Motor PWM current for mini rambo is X+Y on the same first value, Z on the next, then Extruder(s) on the last value
+#define MOTOR_CURRENT_PWM {40,40,130} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+
 
 // ################ END MANUAL SETTINGS ##########################
 
@@ -66,7 +69,7 @@
 // If it is incompatible you will get compiler errors about write functions not beeing compatible!
 //#define COMPAT_PRE1
 #define MIXING_EXTRUDER 0
-#define DRIVE_SYSTEM 3
+#define DRIVE_SYSTEM 3  // drive system 3 = delta
 #define BELT_PITCH 2
 #define PULLEY_TEETH 20
 #define PULLEY_CIRCUMFERENCE (BELT_PITCH * PULLEY_TEETH)

@@ -295,19 +295,25 @@ void motorCurrentControlInit() //Initialize Digipot Motor Current
 #endif
 #if STEPPER_CURRENT_CONTROL==CURRENT_CONTROL_PWM
 // Controlling motor current directly using PWM
-unsigned int motor_current_setting[3] = DEFAULT_PWM_MOTOR_CURRENT;
+unsigned int motor_current_setting[3] = MOTOR_CURRENT_PWM;  //unsigned int motor_current_setting[3] = DEFAULT_PWM_MOTOR_CURRENT;
 
 void setMotorCurrent(uint8_t driver, unsigned int current)
 {
+    if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, motor_current_setting[0]);  //if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, 50);
+    if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, motor_current_setting[1]);   //if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 50);
+    if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, motor_current_setting[2]);   //if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 50);
+  
+  /*
   #if PRINTER == 4
     if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, 50);
     if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 50);
     if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 50);
   #else
-    if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, 140);
-    if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 140);
-    if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 150);
+    if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, motor_current_setting[0]);  //if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, 50);
+    if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, motor_current_setting[1]);   //if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 50);
+    if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, motor_current_setting[2]);   //if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 50);
   #endif
+  */
 }
 void motorCurrentControlInit() //Initialize Digipot Motor Current
 {
