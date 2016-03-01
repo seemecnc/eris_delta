@@ -1,3 +1,18 @@
+
+
+SeeMeNotes:
+-----------
+
+* Andy O added probing gcode G69 which executes all repetier gcodes for auto-probing: level, horz radius, and z offset
+* G69 executes G69 S2, G68, and G29 S2
+
+
+
+
+
+ORIGINAL REPETIER README:
+-------------------------
+
 Compilation instructions
 
 1.  Install Arduino IDE
