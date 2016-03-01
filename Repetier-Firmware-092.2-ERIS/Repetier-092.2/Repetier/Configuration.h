@@ -54,8 +54,16 @@
 // ################## EDIT THESE SETTINGS MANUALLY ################
 //  Microstepping mode  RAMBo and mini RAMBo only support 1,2,4,,16
 #define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
-// Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
-#define MOTOR_CURRENT {40,40,40,40,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+
+//  RAMBo Motor Current setting
+#if MOTHERBOARD == 301
+#define MOTOR_CURRENT {130,130,130,120,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+#else
+//  MOTHERBOARD 302   Mini-RAMBo Motor current PWM conversion, PWM value = MotorCurrentSetting * 255 / range
+#define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_PWM
+#define MOTOR_CURRENT_PWM_RANGE 2000
+#define DEFAULT_PWM_MOTOR_CURRENT  {25,25,1200}  // X+Y, Z, E
+#endif
 
 // ################ END MANUAL SETTINGS ##########################
 

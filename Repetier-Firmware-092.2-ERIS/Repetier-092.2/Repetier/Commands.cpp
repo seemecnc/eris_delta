@@ -304,9 +304,9 @@ void setMotorCurrent(uint8_t driver, unsigned int current)
     if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 50);
     if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 50);
   #else
-    if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, 140);
-    if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 140);
-    if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 150);
+    if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, motor_current_setting[0]);  //  was (MOTOR_CURRENT_PWM_XY_PIN, 140)
+    if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, motor_current_setting[1]);  //  (MOTOR_CURRENT_PWM_Z_PIN, 140)
+    if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, motor_current_setting[2]);  //(MOTOR_CURRENT_PWM_E_PIN, 140)
   #endif
 }
 void motorCurrentControlInit() //Initialize Digipot Motor Current
