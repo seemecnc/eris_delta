@@ -52,10 +52,10 @@
 #include "pins.h"
 
 // ################## EDIT THESE SETTINGS MANUALLY ################
-//  Microstepping mode of your RAMBO board
+//  Microstepping mode  RAMBo and mini RAMBo only support 1,2,4,,16
 #define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
 // Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
-#define MOTOR_CURRENT {140,140,140,150,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+#define MOTOR_CURRENT {40,40,40,40,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
 
 // ################ END MANUAL SETTINGS ##########################
 
@@ -66,13 +66,13 @@
 // If it is incompatible you will get compiler errors about write functions not beeing compatible!
 //#define COMPAT_PRE1
 #define MIXING_EXTRUDER 0
-#define DRIVE_SYSTEM 3
-#define BELT_PITCH 2
-#define PULLEY_TEETH 20
+#define DRIVE_SYSTEM 3  // delta
+#define BELT_PITCH 2  //GT2
+#define PULLEY_TEETH 20  //20 tooth gt2
 #define PULLEY_CIRCUMFERENCE (BELT_PITCH * PULLEY_TEETH)
 #define PULLEY_DIAMETER 10
 //#define PULLEY_CIRCUMFERENCE (PULLEY_DIAMETER * 3.1415927)
-#define STEPS_PER_ROTATION 200
+#define STEPS_PER_ROTATION 200  // standard 1.8 deg motors
 #define MICRO_STEPS 16
 #if PRINTER == 4
 #define AXIS_STEPS_PER_MM 1600
@@ -82,14 +82,14 @@
 #define XAXIS_STEPS_PER_MM AXIS_STEPS_PER_MM
 #define YAXIS_STEPS_PER_MM AXIS_STEPS_PER_MM
 #define ZAXIS_STEPS_PER_MM AXIS_STEPS_PER_MM
-#define EXTRUDER_FAN_COOL_TEMP 50
+#define EXTRUDER_FAN_COOL_TEMP 40
 #define PDM_FOR_EXTRUDER 1
 #define PDM_FOR_COOLER 0
 #define DECOUPLING_TEST_MAX_HOLD_VARIANCE 20
 #define DECOUPLING_TEST_MIN_TEMP_RISE 1
 #define RETRACT_ON_PAUSE 2
-#define PAUSE_START_COMMANDS ""
-#define PAUSE_END_COMMANDS ""
+#define PAUSE_START_COMMANDS "G91/nG1 Z10.O E-5.0 F500.0/nG90/n"
+#define PAUSE_END_COMMANDS "G91/nG1 Z-10.0 E5.0 F500/nG90/n"
 #define EXT0_X_OFFSET 0
 #define EXT0_Y_OFFSET 0
 #define EXT0_STEPS_PER_MM 92.4
@@ -147,7 +147,7 @@
 
 #define RETRACT_DURING_HEATUP true
 #define PID_CONTROL_RANGE 20
-#define SKIP_M109_IF_WITHIN 2
+#define SKIP_M109_IF_WITHIN 10
 #define SCALE_PID_TO_MAX 0
 #define TEMP_HYSTERESIS 0
 #define EXTRUDE_MAXLENGTH 100
@@ -310,7 +310,7 @@
 #define DELTA_SEGMENTS_PER_SECOND_PRINT 225 // Move accurate setting for print moves
 #define DELTA_SEGMENTS_PER_SECOND_MOVE 80 // Less accurate setting for other moves
 
-// Delta settings
+// Delta settings for ORION DELTA
 #if PRINTER == 1
 #define DELTA_DIAGONAL_ROD 178 // mm
 #define DELTA_MAX_RADIUS 145.7
@@ -318,6 +318,8 @@
 #define Z_MAX_LENGTH 234.66
 #define END_EFFECTOR_HORIZONTAL_OFFSET 33
 #define CARRIAGE_HORIZONTAL_OFFSET 27.6
+
+// Rostock MAX v2
 #elif PRINTER == 2
 #define DELTA_DIAGONAL_ROD 269.0 // mm
 #define DELTA_MAX_RADIUS 198.25
@@ -325,11 +327,13 @@
 #define Z_MAX_LENGTH 234.66
 #define END_EFFECTOR_HORIZONTAL_OFFSET 33
 #define CARRIAGE_HORIZONTAL_OFFSET 27.6
-#elif PRINTER == 3 || PRINTER == 4
-#define DELTA_DIAGONAL_ROD 134 // mm
+
+//  Eris    and for BS code for DropLit v2
+#elif PRINTER == 3 || PRINTER == 4  
+#define DELTA_DIAGONAL_ROD 134.58 // calculated is 134.0 but measured after molding is actual 134.58
 #define DELTA_MAX_RADIUS 98
 #define PRINTER_RADIUS 98
-#define Z_MAX_LENGTH 145
+#define Z_MAX_LENGTH 177.88   //   taken from first prototype of production parts
 #define END_EFFECTOR_HORIZONTAL_OFFSET 23.38
 #define CARRIAGE_HORIZONTAL_OFFSET 10
 #endif
@@ -352,11 +356,11 @@
 //#define SOFTWARE_LEVELING
 
 #define DELTASEGMENTS_PER_PRINTLINE 22
-#define STEPPER_INACTIVE_TIME 0L
-#define MAX_INACTIVE_TIME 1800L
-#define MAX_FEEDRATE_X 300
-#define MAX_FEEDRATE_Y 300
-#define MAX_FEEDRATE_Z 300
+#define STEPPER_INACTIVE_TIME 180L
+#define MAX_INACTIVE_TIME 600L
+#define MAX_FEEDRATE_X 150
+#define MAX_FEEDRATE_Y 150
+#define MAX_FEEDRATE_Z 150
 #define HOMING_FEEDRATE_X 80
 #define HOMING_FEEDRATE_Y 80
 #define HOMING_FEEDRATE_Z 80
@@ -442,7 +446,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_REPETITIONS 2
 #define Z_PROBE_HEIGHT 0
 #define Z_PROBE_START_SCRIPT "G28/nG1Z100/n"
-#define Z_PROBE_FINISHED_SCRIPT ""
+#define Z_PROBE_FINISHED_SCRIPT "G28"
 #define FEATURE_AUTOLEVEL 1
 #if PRINTER == 1
 #define Z_PROBE_X1 -64.778

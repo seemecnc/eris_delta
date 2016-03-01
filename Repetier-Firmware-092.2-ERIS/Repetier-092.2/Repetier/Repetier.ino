@@ -1,4 +1,11 @@
 /*
+
+SEEMECNC NOTES:
+This firware has been modified for use with the Eris Delta in particular.  It contains modifications to defaults, deletion of some non eris related code, 
+as well as some changes to the probing routines.  
+
+
+  ORIGINAL REPETIER NOTES BELOW:
     This file is part of Repetier-Firmware.
 
     Repetier-Firmware is free software: you can redistribute it and/or modify
