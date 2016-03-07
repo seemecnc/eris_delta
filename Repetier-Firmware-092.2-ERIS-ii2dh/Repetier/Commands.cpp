@@ -445,7 +445,7 @@ void setMotorCurrent(uint8_t driver, unsigned int current)
     if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, current);   //if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 50);
     if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, current);   //if (driver == 2) analogWrite(MOTOR_CURRENT_PWM_E_PIN, 50);
   
-  /*
+  /*   OLD for setting current on eris and/or droplit.  Use motor currents in configuration.h now
   #if PRINTER == 4
     if (driver == 0) analogWrite(MOTOR_CURRENT_PWM_XY_PIN, 50);
     if (driver == 1) analogWrite(MOTOR_CURRENT_PWM_Z_PIN, 50);

@@ -1932,7 +1932,7 @@ S3(ext)=9
 #define E0_MS1_PIN     65
 #define E0_MS2_PIN     66
 #define LED_PIN        13
-#define ORIG_FAN_PIN        8
+#define ORIG_FAN_PIN    8
 #define SUICIDE_PIN    -1  //PIN that has to be turned on right after start, to keep power flowing.
 #define SDPOWER        -1
 #define SDSS           53
@@ -1949,7 +1949,7 @@ S3(ext)=9
   #define ORIG_Z_MAX_PIN 23
   #define HEATER_0_PIN 3
   #define HEATER_BED_PIN 4
-  #define FAN_1_PIN 6
+  #define FAN_1_PIN -1// 6
   #define ORIG_PS_ON_PIN 71
   #define PS_ON_PIN 71
   #define E1_MS1_PIN 77
@@ -1959,10 +1959,9 @@ S3(ext)=9
   #define MOTOR_CURRENT_PWM_XY_PIN 46
   #define MOTOR_CURRENT_PWM_Z_PIN 45
   #define MOTOR_CURRENT_PWM_E_PIN 44
-  //Motor current PWM conversion, PWM value = MotorCurrentSetting * 255 / range
-  #define MOTOR_CURRENT_PWM_RANGE 2000
-  #define DEFAULT_PWM_MOTOR_CURRENT  {313, 313, 1020}  // X+Y, Z, E
-  #define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_PWM
+  
+ // moved current control to configuration.h file for ease of setup/tuning j.o.
+ 
 #else //RAMBo
   #define ORIG_X_MAX_PIN 24
   #define ORIG_Y_MAX_PIN 23

@@ -62,7 +62,8 @@
 //  MOTHERBOARD 302   Mini-RAMBo Motor current PWM conversion, PWM value = MotorCurrentSetting * 255 / range
 #define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_PWM
 #define MOTOR_CURRENT_PWM_RANGE 2000
-#define DEFAULT_PWM_MOTOR_CURRENT  {25,25,1200}  // X+Y, Z, E
+//  Motor PWM current for mini rambo is X+Y on the same first value, Z on the next, then Extruder(s) on the last value
+#define DEFAULT_PWM_MOTOR_CURRENT  {25,25,130}  // ERIS is 25-30 for x/y and z and 130 for extruder with AT short can on xyz and AT long can on extruder
 #endif
 
 // ################ END MANUAL SETTINGS ##########################
@@ -96,8 +97,8 @@
 #define DECOUPLING_TEST_MAX_HOLD_VARIANCE 20
 #define DECOUPLING_TEST_MIN_TEMP_RISE 1
 #define RETRACT_ON_PAUSE 2
-#define PAUSE_START_COMMANDS "G91/nG1 Z10.O E-5.0 F500.0/nG90/n"
-#define PAUSE_END_COMMANDS "G91/nG1 Z-10.0 E5.0 F500/nG90/n"
+#define PAUSE_START_COMMANDS "G91/nG1 Z10.O E-5.0 F1500.0/nG90/n"
+#define PAUSE_END_COMMANDS "G91/nG1 Z-10.0 E5.0 F1500.0/nG90/n"
 #define EXT0_X_OFFSET 0
 #define EXT0_Y_OFFSET 0
 #define EXT0_STEPS_PER_MM 92.4
@@ -315,7 +316,7 @@
 #define FEATURE_BABYSTEPPING 1
 #define BABYSTEP_MULTIPLICATOR 1
 
-#define DELTA_SEGMENTS_PER_SECOND_PRINT 225 // Move accurate setting for print moves
+#define DELTA_SEGMENTS_PER_SECOND_PRINT 200 // Move accurate setting for print moves
 #define DELTA_SEGMENTS_PER_SECOND_MOVE 80 // Less accurate setting for other moves
 
 // Delta settings for ORION DELTA
@@ -341,7 +342,7 @@
 #define DELTA_DIAGONAL_ROD 134.58 // calculated is 134.0 but measured after molding is actual 134.58
 #define DELTA_MAX_RADIUS 98
 #define PRINTER_RADIUS 98
-#define Z_MAX_LENGTH 177.88   //   taken from first prototype of production parts
+#define Z_MAX_LENGTH 175.0   //   taken from first prototype of production parts
 #define END_EFFECTOR_HORIZONTAL_OFFSET 23.38
 #define CARRIAGE_HORIZONTAL_OFFSET 10
 #endif

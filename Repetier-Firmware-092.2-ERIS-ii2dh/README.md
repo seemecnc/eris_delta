@@ -2,6 +2,18 @@
 
 #for ERIS DELTA by SEEMECNC 
 
+
+
+
+
+
+
+no0tes:
+pin6 is the case fan
+pin8 is the HE cooler fan
+
+
+
 Special thanks to the following:
 
 in2str

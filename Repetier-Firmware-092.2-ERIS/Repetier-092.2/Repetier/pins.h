@@ -1932,7 +1932,7 @@ S3(ext)=9
 #define E0_MS1_PIN     65
 #define E0_MS2_PIN     66
 #define LED_PIN        13
-#define ORIG_FAN_PIN        8
+#define ORIG_FAN_PIN   8
 #define SUICIDE_PIN    -1  //PIN that has to be turned on right after start, to keep power flowing.
 #define SDPOWER        -1
 #define SDSS           53
@@ -1949,7 +1949,7 @@ S3(ext)=9
   #define ORIG_Z_MAX_PIN 23
   #define HEATER_0_PIN 3
   #define HEATER_BED_PIN 4
-  #define FAN_1_PIN 6
+  #define FAN_1_PIN -1 // 6
   #define ORIG_PS_ON_PIN 71
   #define PS_ON_PIN 71
   #define E1_MS1_PIN 77
@@ -1975,7 +1975,8 @@ S3(ext)=9
   #define ORIG_PS_ON_PIN          4
   #define PS_ON_PIN          4
   #define ORIG_SDCARDDETECT 	    81
-  #define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_DIGIPOT
+  #define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_DIG
+IPOT
 #endif //RAMBo/MiniRambo option
 
 

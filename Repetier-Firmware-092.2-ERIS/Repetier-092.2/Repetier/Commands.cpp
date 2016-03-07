@@ -295,7 +295,7 @@ void motorCurrentControlInit() //Initialize Digipot Motor Current
 #endif
 #if STEPPER_CURRENT_CONTROL==CURRENT_CONTROL_PWM
 // Controlling motor current directly using PWM
-unsigned int motor_current_setting[3] = DEFAULT_PWM_MOTOR_CURRENT;
+//unsigned int motor_current_setting[3] = MOTOR_CURRENT_PWM;
 
 void setMotorCurrent(uint8_t driver, unsigned int current)
 {

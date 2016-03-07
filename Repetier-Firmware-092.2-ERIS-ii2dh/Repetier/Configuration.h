@@ -56,12 +56,17 @@
 #define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
 // Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
 #define MOTOR_CURRENT {140,140,140,150,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+//########   Mini Rambo etc... motor current settings    #########
 //  Motor PWM current for mini rambo is X+Y on the same first value, Z on the next, then Extruder(s) on the last value
-#define MOTOR_CURRENT_PWM {40,40,130} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
+#define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_PWM
+#define MOTOR_CURRENT_PWM_RANGE 2000
+//#define DEFAULT_PWM_MOTOR_CURRENT  {30, 30, 130}  // X+Y, Z, E+
+#define MOTOR_CURRENT_PWM {30, 30, 130}
+
 
 // ################ END MANUAL SETTINGS ##########################
 
-#define FAN_BOARD_PIN -1
+#define FAN_BOARD_PIN 6  // ERIS Case Fan pin
 
 //#define EXTERNALSERIAL  use Arduino serial library instead of build in. Requires more ram, has only 63 byte input buffer.
 // Uncomment the following line if you are using arduino compatible firmware made for Arduino version earlier then 1.0
@@ -84,14 +89,14 @@
 #define XAXIS_STEPS_PER_MM AXIS_STEPS_PER_MM
 #define YAXIS_STEPS_PER_MM AXIS_STEPS_PER_MM
 #define ZAXIS_STEPS_PER_MM AXIS_STEPS_PER_MM
-#define EXTRUDER_FAN_COOL_TEMP 50
+#define EXTRUDER_FAN_COOL_TEMP 40
 #define PDM_FOR_EXTRUDER 1
 #define PDM_FOR_COOLER 0
 #define DECOUPLING_TEST_MAX_HOLD_VARIANCE 20
 #define DECOUPLING_TEST_MIN_TEMP_RISE 1
 #define RETRACT_ON_PAUSE 2
-#define PAUSE_START_COMMANDS ""
-#define PAUSE_END_COMMANDS ""
+#define PAUSE_START_COMMANDS "G91/nG1 Z10.0 E-5.0 F1500/nG90/n"
+#define PAUSE_END_COMMANDS "G91/nG1 Z-10.0 E5.1 F1500/nG90/n"
 #define EXT0_X_OFFSET 0
 #define EXT0_Y_OFFSET 0
 #define EXT0_STEPS_PER_MM 92.4
@@ -123,7 +128,7 @@
 #define EXT0_DESELECT_COMMANDS ""
 
 #if MOTHERBOARD == 302
-#define EXT0_EXTRUDER_COOLER_PIN 6
+#define EXT0_EXTRUDER_COOLER_PIN -1 
 #else
 #define EXT0_EXTRUDER_COOLER_PIN 7
 #endif
@@ -183,11 +188,11 @@
 #if PRINTER == 1 || PRINTER == 2
 #define HAVE_HEATED_BED 1
 #else
-#define HAVE_HEATED_BED 0
+#define HAVE_HEATED_BED 1  // JUST ENABLING FOR CASE TEMP READOUT ON BED PIN J.O.
 #endif
 #define HEATED_BED_MAX_TEMP 120
 #define SKIP_M190_IF_WITHIN 5
-#define HEATED_BED_SENSOR_TYPE 98
+#define HEATED_BED_SENSOR_TYPE 97
 #define HEATED_BED_SENSOR_PIN TEMP_BED_PIN
 #define HEATED_BED_HEATER_PIN HEATER_BED_PIN
 #define HEATED_BED_SET_INTERVAL 5000
@@ -201,7 +206,7 @@
 #define HEATED_BED_DECOUPLE_TEST_PERIOD 300000
 #define MIN_EXTRUDER_TEMP 160
 #define MAXTEMP 247
-#define MIN_DEFECT_TEMPERATURE -10
+#define MIN_DEFECT_TEMPERATURE 1
 #define MAX_DEFECT_TEMPERATURE 290
 
 // ################ Endstop configuration #####################
@@ -320,6 +325,7 @@
 #define Z_MAX_LENGTH 234.66
 #define END_EFFECTOR_HORIZONTAL_OFFSET 33
 #define CARRIAGE_HORIZONTAL_OFFSET 37.9
+
 #elif PRINTER == 2
 #define DELTA_DIAGONAL_ROD 269.0 // mm
 #define DELTA_MAX_RADIUS 198.25
@@ -327,11 +333,12 @@
 #define Z_MAX_LENGTH 234.66
 #define END_EFFECTOR_HORIZONTAL_OFFSET 33
 #define CARRIAGE_HORIZONTAL_OFFSET 37.9
-#elif PRINTER == 3 || PRINTER == 4
-#define DELTA_DIAGONAL_ROD 134 // mm
+
+#elif PRINTER == 3 || PRINTER == 4  //Eris and BS code for droplit
+#define DELTA_DIAGONAL_ROD 134.58 // mm
 #define DELTA_MAX_RADIUS 98
 #define PRINTER_RADIUS 98
-#define Z_MAX_LENGTH 165
+#define Z_MAX_LENGTH 175.0
 #define END_EFFECTOR_HORIZONTAL_OFFSET 23.38
 #define CARRIAGE_HORIZONTAL_OFFSET 10
 #endif
@@ -374,14 +381,14 @@
 #define ALLOW_QUADSTEPPING 1
 #define DOUBLE_STEP_DELAY 1 // time in microseconds
 #define MAX_HALFSTEP_INTERVAL 1999
-#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_X 1200
-#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Y 1200
-#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Z 1200
-#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_X 1500
-#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Y 1500
-#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Z 1500
-#define MAX_JERK 35
-#define MAX_ZJERK 35
+#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_X 250
+#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Y 250
+#define MAX_ACCELERATION_UNITS_PER_SQ_SECOND_Z 250
+#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_X 500
+#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Y 500
+#define MAX_TRAVEL_ACCELERATION_UNITS_PER_SQ_SECOND_Z 500
+#define MAX_JERK 12
+#define MAX_ZJERK 12
 #define PRINTLINE_CACHE_SIZE 16
 #define MOVE_CACHE_LOW 10
 #define LOW_TICKS_PER_MOVE 250000
@@ -413,7 +420,7 @@
 #define POWER_INVERTING 0
 #define KILL_METHOD 1
 #define GCODE_BUFFER_SIZE 2
-#define ACK_WITH_LINENUMBER 1
+#define ACK_WITH_LINENUMBER 1  // will set to 0 when done debugging
 #define WAITING_IDENTIFIER "wait"
 #define ECHO_ON_EXECUTE 1
 #define EEPROM_MODE 1
