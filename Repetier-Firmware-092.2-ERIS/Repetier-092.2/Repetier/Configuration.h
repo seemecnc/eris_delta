@@ -340,7 +340,7 @@
 //  Eris    and for BS code for DropLit v2
 #elif PRINTER == 3 || PRINTER == 4  
 #define DELTA_DIAGONAL_ROD 134.58 // calculated is 134.0 but measured after molding is actual 134.58
-#define DELTA_MAX_RADIUS 98
+#define DELTA_MAX_RADIUS 64.62  // PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET
 #define PRINTER_RADIUS 98
 #define Z_MAX_LENGTH 175.0   //   taken from first prototype of production parts
 #define END_EFFECTOR_HORIZONTAL_OFFSET 23.38
