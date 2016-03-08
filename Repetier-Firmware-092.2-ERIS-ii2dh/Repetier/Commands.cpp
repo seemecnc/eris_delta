@@ -113,9 +113,9 @@ void accelerometer_init()
   //INT1_SRC (31h)
   accelerometer_recv(0x31);
   
-  //INT1_THS (32h)  this is the i2c probe value
+  //INT1_THS (32h)  this is the i2c probe
   accelerometer_recv(0x32);
-  accelerometer_write(0x32,60); // 7bits
+  accelerometer_write(0x32,Z_PROBE_SENSITIVITY); // 7bits
   accelerometer_recv(0x32);
 
   //INT1_DURATION (33h)

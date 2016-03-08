@@ -442,6 +442,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 // #################### Z-Probing #####################
 
 #define FEATURE_Z_PROBE 1
+#define Z_PROBE_SENSITIVITY  23 // 0-126 7 bit value  
 #define Z_PROBE_BED_DISTANCE 5
 #define Z_PROBE_PIN 16 // was set to 17 from ultimachine
 #define Z_PROBE_PULLUP 1 //0
@@ -450,12 +451,12 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_Y_OFFSET 0
 #define Z_PROBE_WAIT_BEFORE_TEST 0
 #define Z_PROBE_SPEED 50 //60
-#define Z_PROBE_XY_SPEED 75
+#define Z_PROBE_XY_SPEED 50
 #define Z_PROBE_SWITCHING_DISTANCE 1
 #define Z_PROBE_REPETITIONS 1
 #define Z_PROBE_HEIGHT 0
 //#define Z_PROBE_START_SCRIPT "G28/nG1Z100/n"
-#define Z_PROBE_START_SCRIPT "G1Z5/n"
+#define Z_PROBE_START_SCRIPT ""
 #define Z_PROBE_FINISHED_SCRIPT ""
 #define FEATURE_AUTOLEVEL 1
 #if PRINTER == 1
@@ -473,12 +474,12 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_X3 0
 #define Z_PROBE_Y3 127.350
 #elif PRINTER == 3 || PRINTER == 4
-#define Z_PROBE_X1 -50 //-55.960
-#define Z_PROBE_Y1 -37 //-32.308
-#define Z_PROBE_X2  57 //55.960
-#define Z_PROBE_Y2 -34 //-32.308
+#define Z_PROBE_X1 -54 //-55.960
+#define Z_PROBE_Y1 -31 //-32.308
+#define Z_PROBE_X2  54 //55.960
+#define Z_PROBE_Y2 -31 //-32.308
 #define Z_PROBE_X3   0
-#define Z_PROBE_Y3  56 //64.617
+#define Z_PROBE_Y3  54 //64.617
 #endif
 #define FEATURE_AXISCOMP 0
 #define AXISCOMP_TANXY 0
