@@ -1,0 +1,119 @@
+
+Accel Probe repeatability test
+
+
+
+##############################    G69 S2 test setting offsets to 0 after each run
+.0125mm per step for mini rambo w/20tooth pulleys
+
+
+      Deviation from first probe hit
+0
+109
+35
+
+0
+115   .075
+38    .0375
+
+0
+109     
+35
+
+0
+110   .0125
+34
+
+0
+111  .0125
+34   .0125 
+
+0
+110  .0125
+32   .0375
+
+0
+112   .0375
+32    .0375
+
+0
+114  .0625
+34   .0125 
+
+0
+115  .075
+32   .0375
+
+0
+116  .0875
+34   .0125
+ 
+0
+116   .0875
+32    .0375
+
+0
+115  
+32    .0375
+
+
+
+##########################  G68 Radius calibration starting with 65 as the default
+
+65.169
+65.215
+65.169
+65.185
+65.169
+65.215
+65.231
+65.215
+65.215
+65.246
+65.231
+
+MAX deviation was .077  so less than 100 microns
+
+
+
+###################   G29 S2 Z height Tests
+
+175.048
+175.05
+175.052      Seems to keep adding when not restoring to default
+175.06
+175.067
+
+
+175.056
+175.052
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

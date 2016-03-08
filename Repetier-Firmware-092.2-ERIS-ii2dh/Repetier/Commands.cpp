@@ -831,6 +831,7 @@ void Commands::processGCode(GCode *com)
         Printer::measureDistortion();
         Printer::feedrate = oldFeedrate;
 #else
+        Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
         bool oldAutolevel = Printer::isAutolevelActive();
         Printer::setAutolevelActive(false);
@@ -856,7 +857,7 @@ void Commands::processGCode(GCode *com)
             Printer::updateCurrentPosition();
             Printer::zLength += sum - Printer::currentPosition[Z_AXIS];
             Printer::updateDerivedParameter();
-            Printer::homeAxis(true,true,true);
+            //Printer::homeAxis(true,true,true);
 #else
             Printer::currentPositionSteps[Z_AXIS] = sum * Printer::axisStepsPerMM[Z_AXIS];
             Printer::zLength = Printer::runZMaxProbe() + sum-ENDSTOP_Z_BACK_ON_HOME;
@@ -876,6 +877,7 @@ void Commands::processGCode(GCode *com)
         printCurrentPosition(PSTR("G29 "));
         GCode::executeFString(Com::tZProbeEndScript);
         Printer::feedrate = oldFeedrate;
+        Printer::homeAxis(true,true,true);
 #endif // DISTORTION_CORRECTION
     }
     break;
@@ -961,14 +963,14 @@ void Commands::processGCode(GCode *com)
     }
     break;
 #endif
-    case 68: // G29 3 points, build average or distortion compensation
+    case 68: // probes center X0 Y0 then  probes x/y 3rd position, commonly the z tower on deltas
     {
 #if DISTORTION_CORRECTION
         float oldFeedrate = Printer::feedrate;
         Printer::measureDistortion();
         Printer::feedrate = oldFeedrate;
 #else
-        //Printer::homeAxis(true,true,true);
+        Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
         bool oldAutolevel = Printer::isAutolevelActive();
         Printer::setAutolevelActive(false);
@@ -995,7 +997,7 @@ void Commands::processGCode(GCode *com)
         Printer::feedrate = oldFeedrate;
         Printer::setAutolevelActive(oldAutolevel);
         Printer::updateCurrentPosition(true);
-        printCurrentPosition(PSTR("G29 "));
+        printCurrentPosition(PSTR("hehe"));
         GCode::executeFString(Com::tZProbeEndScript);
         Printer::feedrate = oldFeedrate;
         Printer::homeAxis(true,true,true);
@@ -1009,7 +1011,7 @@ void Commands::processGCode(GCode *com)
         Printer::measureDistortion();
         Printer::feedrate = oldFeedrate;
 #else
-       // Printer::homeAxis(true,true,true);
+        Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
         bool oldAutolevel = Printer::isAutolevelActive();
         Printer::setAutolevelActive(false);
@@ -1031,7 +1033,7 @@ void Commands::processGCode(GCode *com)
         {
             Printer::updateCurrentPosition();
             Printer::updateDerivedParameter();
-            Printer::homeAxis(true,true,true);
+            //Printer::homeAxis(true,true,true); added to end of main g69
             Com::printInfoFLN(Com::tZProbeZReset);
             Com::printFLN(Com::tZProbePrinterHeight,Printer::zLength);
         }
@@ -1067,6 +1069,7 @@ void Commands::processGCode(GCode *com)
         printCurrentPosition(PSTR("G69 "));
         GCode::executeFString(Com::tZProbeEndScript);
         Printer::feedrate = oldFeedrate;
+        Printer::homeAxis(true,true,true);
 #endif // DISTORTION_CORRECTION
     }
     break;

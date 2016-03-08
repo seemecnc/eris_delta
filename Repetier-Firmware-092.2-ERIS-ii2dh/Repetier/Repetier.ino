@@ -44,12 +44,12 @@ Implemented Codes
 - G20 - Units for G0/G1 are inches.
 - G21 - Units for G0/G1 are mm.
 - G28 - Home all axis or named axis.
-- G29 S<0..2> - Z-Probe at the 3 defined probe points. S = 1 measure avg. zHeight, S = 2 store avg zHeight
+- G29 S<1 or 2> - Z-Probe at the 3 defined probe points. S = 1 measure avg. zHeight, S = 2 store avg zHeight
 - G30 P<0..3> - Single z-probe at current position P = 1 first measurement, P = 2 Last measurement P = 0 or 3 first and last measurement
 - G31 - Write signal of probe sensor
-- G32 S<0..2> P<0..1> - Autolevel print bed. S = 1 measure zLength, S = 2 Measue and store new zLength
-- G68 
-- G69 
+- G32 S<1 or 2> Autolevel print bed. S = 1 measure zLength, S = 2 Measue and store new zLength  NOT USED ON ERIS
+- G68 - Horizontal Radius calibration    NO S1 or S2 needed at all
+- G69 - S<1 or 2> Endstop offset probing S1 displays and S2 stores
 - G90 - Use absolute coordinates
 - G91 - Use relative coordinates
 - G92 - Set current position to cordinates given
