@@ -1082,8 +1082,8 @@ void uiCheckSlowKeys(int &action) {}
 #define UI_DISPLAY_D5_PIN      70
 #define UI_DISPLAY_D6_PIN      85
 #define UI_DISPLAY_D7_PIN      71
-#define UI_ENCODER_A           14
-#define UI_ENCODER_B           72
+#define UI_ENCODER_A           72
+#define UI_ENCODER_B           14
 #define UI_ENCODER_CLICK       9
 #define UI_KILL_PIN           32
 #endif
