@@ -450,7 +450,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_X_OFFSET 0
 #define Z_PROBE_Y_OFFSET 0
 #define Z_PROBE_WAIT_BEFORE_TEST 0
-#define Z_PROBE_SPEED 50 
+#define Z_PROBE_SPEED 60 
 #define Z_PROBE_XY_SPEED 50
 #define Z_PROBE_SWITCHING_DISTANCE 10
 #define Z_PROBE_REPETITIONS 1
@@ -498,7 +498,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define FEATURE_MEMORY_POSITION 1
 #define FEATURE_CHECKSUM_FORCED 0
 #define FEATURE_FAN_CONTROL 1
-#if PRINTER == 1 || PRINTER == 2
+#if PRINTER == 1 || PRINTER == 2 || PRINTER == 3
 #define FEATURE_CONTROLLER 13
 #else
 #define FEATURE_CONTROLLER 0
@@ -520,7 +520,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define UI_DISABLE_AUTO_PAGESWITCH 1
 #define UI_AUTORETURN_TO_MENU_AFTER 600000
 #define FEATURE_UI_KEYS 0
-#define UI_ENCODER_SPEED 1
+#define UI_ENCODER_SPEED 2
 #define UI_KEY_BOUNCETIME 10
 #define UI_KEY_FIRST_REPEAT 500
 #define UI_KEY_REDUCE_REPEAT 50
