@@ -951,7 +951,7 @@ void Commands::processGCode(GCode *com)
         {
 #if MAX_HARDWARE_ENDSTOP_Z
 #if DRIVE_SYSTEM==DELTA
-            Printer::updateCurrentPosition();
+            //Printer::updateCurrentPosition();
             Printer::zLength += sum - Printer::currentPosition[Z_AXIS];
             Printer::updateDerivedParameter();
             //Printer::homeAxis(true,true,true);
