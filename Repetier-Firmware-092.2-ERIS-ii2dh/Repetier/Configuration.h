@@ -443,14 +443,14 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 
 #define FEATURE_Z_PROBE 1
 #define Z_PROBE_SENSITIVITY  25 // 0-126 7 bit value  
-#define Z_PROBE_BED_DISTANCE 7
+#define Z_PROBE_BED_DISTANCE 8
 #define Z_PROBE_PIN 16 // mini-rambo ext pins on P3 ext next to LCD header
 #define Z_PROBE_PULLUP 1 //0
 #define Z_PROBE_ON_HIGH 0 //1
 #define Z_PROBE_X_OFFSET 0
 #define Z_PROBE_Y_OFFSET 0
 #define Z_PROBE_WAIT_BEFORE_TEST 0
-#define Z_PROBE_SPEED 60 
+#define Z_PROBE_SPEED 40
 #define Z_PROBE_XY_SPEED 50
 #define Z_PROBE_SWITCHING_DISTANCE 10
 #define Z_PROBE_REPETITIONS 1
