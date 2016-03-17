@@ -834,6 +834,7 @@ void Commands::processGCode(GCode *com)
         if(com->hasS() && com->S == 2){ // only reset value if saving new value
         Printer::zLength = Z_MAX_LENGTH; // set Z height to firmware default
         EEPROM::storeDataIntoEEPROM(); // store default before calibration
+        EEPROM::readDataFromEEPROM();
         }
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
@@ -954,6 +955,7 @@ void Commands::processGCode(GCode *com)
         if(com->hasS() && com->S == 2){ // only reset eeprom if saving new value
         Printer::zLength = Z_MAX_LENGTH; // set Z height to firmware default
         EEPROM::storeDataIntoEEPROM(); // store default before calibration
+        EEPROM::readDataFromEEPROM(); // would not take effect unless read!
         }
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
@@ -1094,6 +1096,7 @@ void Commands::processGCode(GCode *com)
 #else
         Printer::radius0 = PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET; // set horizontal radius to firmware default
         EEPROM::storeDataIntoEEPROM(); //save firmware horizontal radius before calibration
+        EEPROM::readDataFromEEPROM();
         
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
@@ -1180,6 +1183,7 @@ void Commands::processGCode(GCode *com)
         EEPROM::setDeltaTowerYOffsetSteps(0); // set Y offset to 0
         EEPROM::setDeltaTowerZOffsetSteps(0); // set Z offset to 0
         EEPROM::storeDataIntoEEPROM(); // store offsets to 0 before doing anything
+        EEPROM::readDataFromEEPROM();
         }
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
