@@ -335,7 +335,7 @@
 #define CARRIAGE_HORIZONTAL_OFFSET 37.9
 
 #elif PRINTER == 3 || PRINTER == 4  //Eris and BS code for droplit
-#define DELTA_DIAGONAL_ROD 134.58 // mm
+#define DELTA_DIAGONAL_ROD 134.9  // 134.58 early measurement
 #define DELTA_MAX_RADIUS 65  // max printable area allowed by firmware
 #define PRINTER_RADIUS 98.38  //PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET
 #define Z_MAX_LENGTH 175.0
@@ -455,8 +455,8 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_SWITCHING_DISTANCE 10
 #define Z_PROBE_REPETITIONS 1
 #define Z_PROBE_HEIGHT -.2
-//#define Z_PROBE_START_SCRIPT "G28/nG1Z100/n"
-#define Z_PROBE_START_SCRIPT "M117 Probe Started/n"
+#define Z_PROBE_START_SCRIPT "G28/nG1Z25/n"
+//#define Z_PROBE_START_SCRIPT "M117 Probe Started/n"
 #define Z_PROBE_FINISHED_SCRIPT ""
 #define FEATURE_AUTOLEVEL 1
 #if PRINTER == 1
@@ -479,7 +479,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_X2  54 //55.960
 #define Z_PROBE_Y2 -31 //-32.308
 #define Z_PROBE_X3   0
-#define Z_PROBE_Y3  54 //64.617
+#define Z_PROBE_Y3  65 //64.617
 #endif
 #define FEATURE_AXISCOMP 0
 #define AXISCOMP_TANXY 0
