@@ -1,0 +1,12 @@
+;  ERIS Delta Auotcalibration Script
+M202 Z1850
+G69 S2 ;Endstop Calibration
+M117 ENDSTOPS CALIBRATED
+G68 ;Horizontal Radius Calibration
+M117 HORIZONTAL RADIUS CALIBRATED
+G30 S2 ;Z height calibration
+M117 Z Height Calibrated
+M202 Z400 ;  DEFAULT ACCEL FOR TRAVLE MOVES
+M500
+G4 S2
+M117 SAVING CALIBRATION
