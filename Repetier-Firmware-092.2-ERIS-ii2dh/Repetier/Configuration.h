@@ -205,9 +205,9 @@
 #define HEATED_BED_PID_MAX 255
 #define HEATED_BED_DECOUPLE_TEST_PERIOD 300000
 #define MIN_EXTRUDER_TEMP 160
-#define MAXTEMP 247
+#define MAXTEMP 285
 #define MIN_DEFECT_TEMPERATURE 1
-#define MAX_DEFECT_TEMPERATURE 290
+#define MAX_DEFECT_TEMPERATURE 299
 
 // ################ Endstop configuration #####################
 

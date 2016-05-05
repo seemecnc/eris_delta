@@ -952,6 +952,9 @@ void Commands::processGCode(GCode *com)
         Printer::measureDistortion();
         Printer::feedrate = oldFeedrate;
 #else
+        float sum = 0, sum1 = 0,last,oldFeedrate = Printer::feedrate;
+        bool oldAutolevel = Printer::isAutolevelActive();
+    do{
         if(com->hasS() && com->S == 2){ // only reset eeprom if saving new value
         Printer::zLength = Z_MAX_LENGTH; // set Z height to firmware default
         EEPROM::storeDataIntoEEPROM(); // store default before calibration
@@ -959,32 +962,16 @@ void Commands::processGCode(GCode *com)
         }
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
-        bool oldAutolevel = Printer::isAutolevelActive();
         Printer::setAutolevelActive(false);
-        float sum = 0, sum1 = 0, sum2 = 0,last,oldFeedrate = Printer::feedrate;
-        int repeats = 1;
         Printer::moveTo(0,0,IGNORE_COORDINATE,IGNORE_COORDINATE,EEPROM::zProbeXYSpeed());
         
-        do{
           sum1 = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false); // First tap
           sum = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false); // Second tap
           if ((sum1 - sum) > .1 || (sum1 - sum) < - 0.1){ //tap reports distance, if more or less than .1mm, it will re-run
-            sum2 = sum1;
-            sum = 0;
-            if (repeats == 5){
               Com::printErrorFLN(Com::tZProbeFailed);
               sum = -1;
-              break;
-            }
-            ++repeats;
           }
-          else{
-            sum2 = 0;
-            repeats = 1;
-          }
-        } while (sum2 > 0.1); // repeat until taps are within .1 mm
-        
-        if(sum < 0) break;
+    }while(sum < 1);
         if(com->hasS() && com->S)
         {
 #if MAX_HARDWARE_ENDSTOP_Z
@@ -1094,58 +1081,37 @@ void Commands::processGCode(GCode *com)
         Printer::measureDistortion();
         Printer::feedrate = oldFeedrate;
 #else
+        bool oldAutolevel = Printer::isAutolevelActive();
+        float sum = 0, sum1 = 0, last, hradius,oldFeedrate = Printer::feedrate;
+    do{
         Printer::radius0 = PRINTER_RADIUS-END_EFFECTOR_HORIZONTAL_OFFSET-CARRIAGE_HORIZONTAL_OFFSET; // set horizontal radius to firmware default
         EEPROM::storeDataIntoEEPROM(); //save firmware horizontal radius before calibration
         EEPROM::readDataFromEEPROM();
         
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
-        bool oldAutolevel = Printer::isAutolevelActive();
         Printer::setAutolevelActive(false);
-        float sum = 0, sum1 = 0, sum2 = 0, last, hradius,oldFeedrate = Printer::feedrate;
-        int repeats = 1;
         Printer::moveTo(0,0,IGNORE_COORDINATE,IGNORE_COORDINATE,EEPROM::zProbeXYSpeed());
         
-        do{
-          sum1 = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false);
-          sum = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false);
-          if ((sum1 - sum) > .1 || (sum1 - sum) < - 0.1){ //tap reports distance, if more or less than .1mm, it will re-run
-            sum2 = sum1;
-            sum = 0;
-            if (repeats == 5){
-              Com::printErrorFLN(Com::tZProbeFailed);
-              sum = -1;
-              break;
-            }
-            ++repeats;
-          }
-          else{
-            sum2 = 0;
-            repeats = 1;
-          }
-        } while (sum2 > 0.1);
-        if(sum < 0) break;
+        sum1 = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false);
+        sum = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false);
+        if ((sum1 - sum) > .1 || (sum1 - sum) < - 0.1){ //tap reports distance, if more or less than .1mm, it will re-run
+            Com::printErrorFLN(Com::tZProbeFailed);
+            sum = -1;
+            continue;
+        }
+
         Printer::moveTo(EEPROM::zProbeX3(),EEPROM::zProbeY3(),IGNORE_COORDINATE,IGNORE_COORDINATE,EEPROM::zProbeXYSpeed());
         
-        do{
           sum1 = Printer::runZProbe(false,true); // First tap
           last = Printer::runZProbe(false,true); // Second tap
           if ((sum1 - last) > .1 || (sum1 - last) < - 0.1){
-            sum2 = last;
-            last = 0;
-            if (repeats == 5){
               Com::printErrorFLN(Com::tZProbeFailed);
-              last = -1;
-              break;
-            }
-            ++repeats;
+              sum = -1;
+              continue;
           }
-          else{
-            sum2 = 0;
-            repeats = 1;
-          }
-        } while (sum2 > 0.1); // Repeat until both taps are within .1 mm
-        if(last < 0) break;
+        } while (sum < 0);
+        
         sum = (sum - last)*80;
         if(sum<0) 
         {
@@ -1178,6 +1144,9 @@ void Commands::processGCode(GCode *com)
         Printer::measureDistortion();
         Printer::feedrate = oldFeedrate;
 #else
+        bool oldAutolevel = Printer::isAutolevelActive();
+        float sum1 = 0, sum = 0, last,oldFeedrate = Printer::feedrate;
+    do{
         if(com->hasS() && com->S == 2){ // only wipe values if saving the new values
         EEPROM::setDeltaTowerXOffsetSteps(0); // set X offset to 0
         EEPROM::setDeltaTowerYOffsetSteps(0); // set Y offset to 0
@@ -1187,79 +1156,41 @@ void Commands::processGCode(GCode *com)
         }
         Printer::homeAxis(true,true,true);
         GCode::executeFString(Com::tZProbeStartScript);
-        bool oldAutolevel = Printer::isAutolevelActive();
         Printer::setAutolevelActive(false);
-        float sum1 = 0, sum2 = 0, sum = 0, last,oldFeedrate = Printer::feedrate;
-        int repeats = 1;
         Printer::moveTo(EEPROM::zProbeX1(),EEPROM::zProbeY1(),IGNORE_COORDINATE,IGNORE_COORDINATE,EEPROM::zProbeXYSpeed());
        
-        do {  
           sum1 = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false); //First tap
           sum = Printer::runZProbe(true,false,Z_PROBE_REPETITIONS,false); //Second tap
           if ((sum1 - sum) > .1 || (sum1 - sum) < - 0.1){ //tap reports distance, if more or less than .1mm, it will re-run
-            sum2 = sum1;
-            sum = 0;
-            if (repeats == 5){
-              Com::printErrorFLN(Com::tZProbeFailed);
-              sum = -1;
-              break;
-            }
-            ++repeats;
+            Com::printErrorFLN(Com::tZProbeFailed); //output to terminal Z probe failure
+            sum = -1;
+            continue;
           }
-          else{
-            sum2 = 0;
-            repeats = 1;
-          }
-        } while (sum2 > 0.1); // loop to make sure 2 probe repetitions are within 0.1 mm of each other
-        
+
         int32_t offsetX = ((sum * 80) - (Z_PROBE_BED_DISTANCE * 80)), offsetStepsX = EEPROM::deltaTowerXOffsetSteps();
-        if(sum < 0) break;
         Printer::moveTo(EEPROM::zProbeX2(),EEPROM::zProbeY2(),IGNORE_COORDINATE,IGNORE_COORDINATE,EEPROM::zProbeXYSpeed());
  
-        do {
           sum1 = Printer::runZProbe(false,false); //First tap Y tower
           last = Printer::runZProbe(false,false); //Second tap Y tower
           if ((sum1 - last) > .1 || (sum1 - last) < - 0.1){
-            sum2 = last;
-            last = 0;
-            if (repeats == 5){
-              Com::printErrorFLN(Com::tZProbeFailed); //output to terminal Z probe failure
-              last = -1; // fail flag to stop probe
-              break;
-            }
-            ++repeats;
+            Com::printErrorFLN(Com::tZProbeFailed); //output to terminal Z probe failure
+            last = -1; // fail flag to stop probe
+            continue;
           }
-          else
-            sum2 = 0;
-            repeats = 1;
-        } while (sum2 > 0.1); // Loop if both taps are not within 0.1 mm
         
         int32_t offsetY = ((last * 80) - (Z_PROBE_BED_DISTANCE * 80)), offsetStepsY = EEPROM::deltaTowerYOffsetSteps();
-        if(last < 0) break;
         Printer::moveTo(EEPROM::zProbeX3(),EEPROM::zProbeY3(),IGNORE_COORDINATE,IGNORE_COORDINATE,EEPROM::zProbeXYSpeed());
         
-        do{
           sum1 = Printer::runZProbe(false,true); //First tap Z tower
           last = Printer::runZProbe(false,true); //Second tap Z tower
           if((sum1 - last) > .1 || (sum1 - last) < - 0.1){
-            sum2 = last;
-            last = 0;
-            if (repeats == 5){
-              Com::printErrorFLN(Com::tZProbeFailed); //output to terminal Z probe failure
-              last = -1; // fail flag to stop probe
-              break;
-            }
-            ++repeats;
+            Com::printErrorFLN(Com::tZProbeFailed); //output to terminal Z probe failure
+            last = -1; // fail flag to stop probe
+            continue;
           }
-          else{
-            sum2 = 0;
-            repeats = 1;
-          } 
-        } while (sum2 > 0.1); // Loop if both taps are not within 0.1 mm
-        
+          
         int32_t offsetZ = ((last * 80) - (Z_PROBE_BED_DISTANCE * 80)), offsetStepsZ = EEPROM::deltaTowerZOffsetSteps();
-        if(last < 0) break;
-        
+    
         if(com->hasS() && com->S)
         {
             Printer::updateCurrentPosition();
@@ -1296,6 +1227,7 @@ void Commands::processGCode(GCode *com)
           }
           EEPROM::storeDataIntoEEPROM();
         }
+    }while(sum < 0 || last < 0);
         Printer::updateCurrentPosition(true);
         printCurrentPosition(PSTR("G69 "));
         GCode::executeFString(Com::tZProbeEndScript);
@@ -2446,3 +2378,4 @@ void Commands::writeLowestFreeRAM()
         Com::printFLN(Com::tFreeRAM, lowestRAMValue);
     }
 }
+
