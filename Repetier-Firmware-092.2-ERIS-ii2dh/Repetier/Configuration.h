@@ -61,7 +61,7 @@
 #define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_PWM
 #define MOTOR_CURRENT_PWM_RANGE 2000
 //#define DEFAULT_PWM_MOTOR_CURRENT  {30, 30, 130}  // X+Y, Z, E+
-#define MOTOR_CURRENT_PWM {20, 20, 195}
+#define MOTOR_CURRENT_PWM {20, 20, 175}
 
 
 // ################ END MANUAL SETTINGS ##########################
