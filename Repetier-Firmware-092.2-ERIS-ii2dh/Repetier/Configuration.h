@@ -420,7 +420,8 @@
 #define POWER_INVERTING 0
 #define KILL_METHOD 1
 #define GCODE_BUFFER_SIZE 2
-#define ACK_WITH_LINENUMBER 1  // will set to 0 when done debugging
+// will set to 0 when done debugging
+#define ACK_WITH_LINENUMBER 1  
 #define WAITING_IDENTIFIER "wait"
 #define ECHO_ON_EXECUTE 1
 #define EEPROM_MODE 1
@@ -442,9 +443,11 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 // #################### Z-Probing #####################
 
 #define FEATURE_Z_PROBE 1
-#define Z_PROBE_SENSITIVITY  25 // 0-126 7 bit value  
+// 0-126 7 bit value  
+#define Z_PROBE_SENSITIVITY  25 
 #define Z_PROBE_BED_DISTANCE 20
-#define Z_PROBE_PIN 16 // mini-rambo ext pins on P3 ext next to LCD header
+// mini-rambo ext pins on P3 ext next to LCD header
+#define Z_PROBE_PIN 16 
 #define Z_PROBE_PULLUP 1 //0
 #define Z_PROBE_ON_HIGH 0 //1
 #define Z_PROBE_X_OFFSET 0
