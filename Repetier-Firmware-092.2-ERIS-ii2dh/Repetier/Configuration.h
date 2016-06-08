@@ -57,6 +57,7 @@
 // Motor Current setting (Only functional when motor driver current ref pins are connected to a digital trimpot on supported boards)
 #define MOTOR_CURRENT {140,140,140,150,0} // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
 //########   Mini Rambo etc... motor current settings    #########
+
 //  Motor PWM current for mini rambo is X+Y on the same first value, Z on the next, then Extruder(s) on the last value
 #define STEPPER_CURRENT_CONTROL CURRENT_CONTROL_PWM
 #define MOTOR_CURRENT_PWM_RANGE 2000
@@ -185,10 +186,10 @@
 #define HEATER_PWM_SPEED 0
 
 // ############# Heated bed configuration ########################
-#if PRINTER == 1 || PRINTER == 2
+#if PRINTER == 1 || PRINTER == 2  // ORION and Rostock MAX
 #define HAVE_HEATED_BED 1
 #else
-#define HAVE_HEATED_BED 0  // JUST ENABLING FOR CASE TEMP READOUT ON BED PIN J.O.
+#define HAVE_HEATED_BED 0  // ERIS and DropLit have no heated beds
 #endif
 #define HEATED_BED_MAX_TEMP 120
 #define SKIP_M190_IF_WITHIN 5
@@ -204,10 +205,39 @@
 #define HEATED_BED_PID_DGAIN 641.82
 #define HEATED_BED_PID_MAX 255
 #define HEATED_BED_DECOUPLE_TEST_PERIOD 300000
-#define MIN_EXTRUDER_TEMP 160
-#define MAXTEMP 285
-#define MIN_DEFECT_TEMPERATURE 10
-#define MAX_DEFECT_TEMPERATURE 300
+
+
+// ############## Hotend safety settings ######################
+/* Orion = 1
+   Rostock Max V2 = 2
+   ERIS = 3
+   DROPLIT = 4
+ */
+#if PRINTER == 1 // Orion Delta w/PEEK Hotend
+#define MIN_EXTRUDER_TEMP 150  //  this is the minimum temperature that will allow the extruder to drive filament, lower and it will ignore extruder commands
+#define MAXTEMP 245            //  this is the max allowable temp the hotend can be set at, any higher will trigger safety's
+#define MIN_DEFECT_TEMPERATURE 18  // this is the min temp that will allow the hotend to start heating.  Below this it will show as defective to help identify bad thermistors
+#define MAX_DEFECT_TEMPERATURE 300 // this is the max temp that wthe printer will throw errors about defective thermistors
+
+#elif PRINTER == 2  // Rostock MAX w/PEEK hotend
+#define MIN_EXTRUDER_TEMP 150  //  this is the minimum temperature that will allow the extruder to drive filament, lower and it will ignore extruder commands
+#define MAXTEMP 245            //  this is the max allowable temp the hotend can be set at, any higher will trigger safety's
+#define MIN_DEFECT_TEMPERATURE 18  // this is the min temp that will allow the hotend to start heating.  Below this it will show as defective to help identify bad thermistors
+#define MAX_DEFECT_TEMPERATURE 300 // this is the max temp that wthe printer will throw errors about defective thermistors
+
+#elif PRINTER == 3  // ERIS Delta w/HE280 hotend BUT limited in temp due to cold end cooling
+#define MIN_EXTRUDER_TEMP 150  //  this is the minimum temperature that will allow the extruder to drive filament, lower and it will ignore extruder commands
+#define MAXTEMP 240            //  this is the max allowable temp the hotend can be set at, any higher will trigger safety's
+#define MIN_DEFECT_TEMPERATURE 18  // this is the min temp that will allow the hotend to start heating.  Below this it will show as defective to help identify bad thermistors
+#define MAX_DEFECT_TEMPERATURE 300 // this is the max temp that wthe printer will throw errors about defective thermistors
+
+#elif PRINTER == 4  // DropLit so just useless numbers
+#define MIN_EXTRUDER_TEMP 50   //  this is the minimum temperature that will allow the extruder to drive filament, lower and it will ignore extruder commands
+#define MAXTEMP 100             //  this is the max allowable temp the hotend can be set at, any higher will trigger safety's
+#define MIN_DEFECT_TEMPERATURE 18 // this is the min temp that will allow the hotend to start heating.  Below this it will show as defective to help identify bad thermistors
+#define MAX_DEFECT_TEMPERATURE 300 // this is the max temp that wthe printer will throw errors about defective thermistors
+
+#endif
 
 // ################ Endstop configuration #####################
 
@@ -439,8 +469,11 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define SERVO3_PIN -1
 #define FEATURE_WATCHDOG 1
 
-// #################### Z-Probing #####################
+/* #################### Z-Probe configuration and Settings #####################
+   These will change machine to machine, be sure to have the correct machine selected in the top of this config file
+*/
 
+#if PRINTER == 1  //  Orion Delta w/ molded carriages and ball cup arms
 #define FEATURE_Z_PROBE 1
 #define Z_PROBE_SENSITIVITY  25 // 0-126 7 bit value  
 #define Z_PROBE_BED_DISTANCE 20
@@ -459,38 +492,96 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 //#define Z_PROBE_START_SCRIPT "M117 Probe Started/n"
 #define Z_PROBE_FINISHED_SCRIPT ""
 #define FEATURE_AUTOLEVEL 1
-#if PRINTER == 1
+
+#elif PRINTER == 2  // Rostock MAX w/ molded carriages and ball cup arms
+#define FEATURE_Z_PROBE 1
+#define Z_PROBE_SENSITIVITY  25 // 0-126 7 bit value  
+#define Z_PROBE_BED_DISTANCE 20
+#define Z_PROBE_PIN 16 // mini-rambo ext pins on P3 ext next to LCD header
+#define Z_PROBE_PULLUP 1 //0
+#define Z_PROBE_ON_HIGH 0 //1
+#define Z_PROBE_X_OFFSET 0
+#define Z_PROBE_Y_OFFSET 0
+#define Z_PROBE_WAIT_BEFORE_TEST 0
+#define Z_PROBE_SPEED 90
+#define Z_PROBE_XY_SPEED 50
+#define Z_PROBE_SWITCHING_DISTANCE 10
+#define Z_PROBE_REPETITIONS 1
+#define Z_PROBE_HEIGHT -.2
+#define Z_PROBE_START_SCRIPT "G28/nG1Z25/n"
+//#define Z_PROBE_START_SCRIPT "M117 Probe Started/n"
+#define Z_PROBE_FINISHED_SCRIPT ""
+#define FEATURE_AUTOLEVEL 1
+
+#elif PRINTER == 3  // ERIS Delta
+#define FEATURE_Z_PROBE 1
+#define Z_PROBE_SENSITIVITY  25 // 0-126 7 bit value  
+#define Z_PROBE_BED_DISTANCE 20
+#define Z_PROBE_PIN 16 // mini-rambo ext pins on P3 ext next to LCD header
+#define Z_PROBE_PULLUP 1 //0
+#define Z_PROBE_ON_HIGH 0 //1
+#define Z_PROBE_X_OFFSET 0
+#define Z_PROBE_Y_OFFSET 0
+#define Z_PROBE_WAIT_BEFORE_TEST 0
+#define Z_PROBE_SPEED 90
+#define Z_PROBE_XY_SPEED 50
+#define Z_PROBE_SWITCHING_DISTANCE 10
+#define Z_PROBE_REPETITIONS 1
+#define Z_PROBE_HEIGHT -.2
+#define Z_PROBE_START_SCRIPT "G28/nG1Z25/n"
+//#define Z_PROBE_START_SCRIPT "M117 Probe Started/n"
+#define Z_PROBE_FINISHED_SCRIPT ""
+#define FEATURE_AUTOLEVEL 1
+
+#endif
+
+// ##############  Z Probe X/Y coordinates for endstop offsets and radius comp uses the Z_PROBE_Y3 coordinate ############
+
+#if PRINTER == 1  // Orion Delta with molded carriages AND ball cup arms - needs finished
 #define Z_PROBE_X1 -64.778
 #define Z_PROBE_Y1 -37.400
 #define Z_PROBE_X2 64.778
 #define Z_PROBE_Y2 -37.400
 #define Z_PROBE_X3 0
 #define Z_PROBE_Y3 74.800
-#elif PRINTER == 2
-#define Z_PROBE_X1 -110.288
-#define Z_PROBE_Y1 -63.675
-#define Z_PROBE_X2 110.288
-#define Z_PROBE_Y2 -63.675
+
+#elif PRINTER == 2  //  Rostock MAX with modled carriagges AND ball cup arms
+#define Z_PROBE_X1 -123.565
+#define Z_PROBE_Y1 -71.34
+#define Z_PROBE_X2 123.565
+#define Z_PROBE_Y2 -71.340
 #define Z_PROBE_X3 0
-#define Z_PROBE_Y3 127.350
-#elif PRINTER == 3 || PRINTER == 4
-#define Z_PROBE_X1 -54 //-55.960
-#define Z_PROBE_Y1 -31 //-32.308
-#define Z_PROBE_X2  54 //55.960
-#define Z_PROBE_Y2 -31 //-32.308
+#define Z_PROBE_Y3 142.68
+
+#elif PRINTER == 3  //  ERIS Delta
+#define Z_PROBE_X1 -54 
+#define Z_PROBE_Y1 -31 
+#define Z_PROBE_X2  54 
+#define Z_PROBE_Y2 -31 
 #define Z_PROBE_X3   0
-#define Z_PROBE_Y3  65 //64.617
+#define Z_PROBE_Y3  65 
+
 #endif
+
+
 #define FEATURE_AXISCOMP 0
 #define AXISCOMP_TANXY 0
 #define AXISCOMP_TANYZ 0
 #define AXISCOMP_TANXZ 0
 
-#ifndef SDSUPPORT  // Some boards have sd support on board. These define the values already in pins.h
+// ##############  SD Card Settings  #########################
+
+
+#ifndef SDSUPPORT 
+#if PRINTER == 1 || PRINTER == 2
+#define SDSUPPORT 1
+#else
 #define SDSUPPORT 0
+#endif
 #define SDCARDDETECT 81
 #define SDCARDDETECTINVERTED 0
 #endif
+
 #define SD_EXTENDED_DIR 1 /** Show extended directory including file length. Don't use this with Pronterface! */
 #define SD_RUN_ON_STOP ""
 #define SD_STOP_HEATER_AND_MOTORS_ON_STOP 1
@@ -498,20 +589,20 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define FEATURE_MEMORY_POSITION 1
 #define FEATURE_CHECKSUM_FORCED 0
 #define FEATURE_FAN_CONTROL 1
-#if PRINTER == 1 || PRINTER == 2 || PRINTER == 3
+#if PRINTER == 1 || PRINTER == 2
 #define FEATURE_CONTROLLER 13
 #else
 #define FEATURE_CONTROLLER 0
 #endif
 #define UI_LANGUAGE 1000 // 1000 = User defined language in v92+
 #if PRINTER == 1
-#define UI_PRINTER_NAME "ORION"
+#define UI_PRINTER_NAME "ORION Delta"
 #define UI_PRINTER_COMPANY "SeeMeCNC"
 #elif PRINTER == 2
 #define UI_PRINTER_NAME "Rostock Max"
 #define UI_PRINTER_COMPANY "SeeMeCNC"
 #elif PRINTER == 3
-#define UI_PRINTER_NAME "ERIS"
+#define UI_PRINTER_NAME "ERIS Delta"
 #define UI_PRINTER_COMPANY "SeeMeCNC"
 #endif
 #define UI_PAGES_DURATION 4000
@@ -539,9 +630,9 @@ Values must be in range 1..255
 #define BEEPER_LONG_SEQUENCE 32,4
 #define UI_SET_PRESET_HEATED_BED_TEMP_PLA 60
 #define UI_SET_PRESET_EXTRUDER_TEMP_PLA   180
-#define UI_SET_PRESET_HEATED_BED_TEMP_ABS 90
+#define UI_SET_PRESET_HEATED_BED_TEMP_ABS 100
 #define UI_SET_PRESET_EXTRUDER_TEMP_ABS   200
-#define UI_SET_MIN_HEATED_BED_TEMP  40
+#define UI_SET_MIN_HEATED_BED_TEMP  30
 #define UI_SET_MAX_HEATED_BED_TEMP 120
 #define UI_SET_MIN_EXTRUDER_TEMP   150
 #define UI_SET_MAX_EXTRUDER_TEMP   240
