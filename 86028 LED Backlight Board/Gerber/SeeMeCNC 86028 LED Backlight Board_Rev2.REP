@@ -1,0 +1,252 @@
+*************************************************************
+FileName = SeeMeCNC 86028 LED Backlight Board_Rev2.GBR
+AutoAperture = True
+*************************************************************
+Generating : Top Layer
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D23
+    D24
+    D25
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GTO
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D20
+    D22
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D42
+    D43
+    D44
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GBO
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+    D22
+    D27
+    D28
+    D45
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GM1
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D20
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 2
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GM2
+
+    Adding Layer      : Mechanical 2
+
+
+Used DCodes :
+    D20
+    D22
+    D46
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 8
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GM8
+
+    Adding Layer      : Mechanical 8
+
+
+Used DCodes :
+    D46
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 15
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GM15
+
+    Adding Layer      : Mechanical 15
+
+
+Used DCodes :
+    D48
+    D55
+    D56
+*************************************************************
+
+*************************************************************
+Generating : Drill Drawing
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GD1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Drawing
+
+
+Used DCodes :
+    D56
+    D57
+*************************************************************
+
+*************************************************************
+Generating : Drill Guide
+      File : SeeMeCNC 86028 LED Backlight Board_Rev2.GG1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Guide
+
+
+Used DCodes :
+    D56
+*************************************************************
+
